@@ -231,7 +231,7 @@ def agent(obs, config):
         done = False
         for bad in enemy_ships:
             if manhattan_dist(ship.position, bad.position) == 1 and ship.halite < bad.halite and \
-                    board.cells[bad.position].halite >= 120:
+                    board.cells[bad.position].halite >= 100:
                 move_towards(ship, bad.position)
                 done = True
                 break
@@ -240,10 +240,9 @@ def agent(obs, config):
 
         if (len(me.shipyards) == 0 and me.halite - cost >= 500) or \
                 (
-                        me.halite - cost >= 800 and
+                        me.halite - cost >= 750 and
                         board.step <= 310 and
-                        dist_shipyard(ship, me.shipyards) > 7 and
-                        ship.halite < 200):
+                        dist_shipyard(ship, me.shipyards) > 7):
             # if no shipyards or Manhattan distance of at least 7, make a shipyard
             ship.next_action = ShipAction.CONVERT
             cost += 500
